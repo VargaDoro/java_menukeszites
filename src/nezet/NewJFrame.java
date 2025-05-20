@@ -17,6 +17,16 @@ public class NewJFrame extends javax.swing.JFrame {
     
     public NewJFrame() {
         initComponents();
+        String[] szakok = Konfiguracio.VALASZTHATO_SZAKOK;
+        /* hagyományos for: for + tab*/
+//        for (int i = 0; i < szakok.length; i++) {
+//            String szak = szakok[i];
+//            cmbSzak.addItem(szak);
+//        }
+        /* továbbfejlesztett: fore + tab (végigmegy a szakokon és minden szakot belerak)*/
+        for (String szak : szakok) {
+            cmbSzak.addItem(szak);
+        }
     }
 
     /**
@@ -62,7 +72,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel4.setText("Új név:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Szoftverfejlesztő", "Rendszergazda", "Szoftverfejlesztő és tesztelő" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -103,7 +112,7 @@ public class NewJFrame extends javax.swing.JFrame {
         chbHirlevel.setSelected(true);
         chbHirlevel.setText("hírlevél");
 
-        cmbSzak.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--== Kiválasztott szak ==--", "Szoftverfejlesztő", "Rendszergazda", "Szoftverfejlesztő és tesztelő" }));
+        cmbSzak.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--== Kiválasztott szak ==--" }));
 
         jLabel2.setText("Szak");
 
@@ -321,7 +330,9 @@ public class NewJFrame extends javax.swing.JFrame {
     private void mnuPrgKimenetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPrgKimenetActionPerformed
         //TODO: ha nincs modell betöltve akkor ez nullpointer
         //a szak nevét is ki kell nyerni most ??? ban helyette
-        String msg = "név: " + modell.getNev() + "\nszak" + "%s(%d)".formatted("???", modell.getSzakIndex()) + "\nhírlevél: " + (modell.isHirlevel()?"kér":"nemkér");
+        int i = modell.getSzakIndex();
+        String szak = Konfiguracio.VALASZTHATO_SZAKOK[i];
+        String msg = "név: " + modell.getNev() + "\nszak" + "%s(%d)".formatted(szak, i) + "\nhírlevél: " + (modell.isHirlevel()?"kér":"nemkér");
         try {
             Files.writeString(Path.of("modellBeszedes.txt"), msg);
         } catch (IOException ex) {
