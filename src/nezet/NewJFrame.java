@@ -9,9 +9,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import modell.Konfiguracio;
 
 public class NewJFrame extends javax.swing.JFrame {
-
+    
+    private Konfiguracio modell;
+    
     public NewJFrame() {
         initComponents();
     }
@@ -44,7 +47,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuPrgKilepes = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mnuPrgKimenet = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -178,8 +181,13 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jMenu1.setText("Program");
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenu1.add(jMenuItem1);
+        mnuPrgKimenet.setText("Modell beszédes kimenete");
+        mnuPrgKimenet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuPrgKimenetActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuPrgKimenet);
 
         jMenuBar1.add(jMenu1);
 
@@ -275,16 +283,25 @@ public class NewJFrame extends javax.swing.JFrame {
                 System.out.println(adatok);
                 
                 /* sorok feldolgozása */
-                String[] sorok = adatok.split("\n");
-                String nev = sorok[0].substring(sorok[0].indexOf(" ")+1);
-                String strSzam = sorok[1].substring(sorok[1].indexOf("(")+1, sorok[1].length()-1);
-                int index = Integer.parseInt(strSzam);
-                String strChb = sorok[2].split(" ")[1];
-                boolean chb = strChb.startsWith("nem")?false:true;
+                String[] sorok = adatok.split(" ");
+                String nev = sorok[0];
+                int index = Integer.parseInt(sorok[1]);
+                boolean chb = Boolean.parseBoolean(sorok[2]);
                 
-                txtNev.setText(nev);
-                cmbSzak.setSelectedIndex(index);
-                chbHirlevel.setSelected(chb);
+                /*modell inicializálása*/
+                modell = new Konfiguracio(nev, index, chb);
+                
+                /*nem osztályos megoldás*/
+//                String nev = sorok[0].substring(sorok[0].indexOf(" ")+1);
+//                String strSzam = sorok[1].substring(sorok[1].indexOf("(")+1, sorok[1].length()-1);
+//                int index = Integer.parseInt(strSzam);
+//                String strChb = sorok[2].split(" ")[1];
+//                boolean chb = strChb.startsWith("nem")?false:true;
+
+                /*modell használata*/
+                txtNev.setText(modell.getNev());
+                cmbSzak.setSelectedIndex(modell.getSzakIndex());
+                chbHirlevel.setSelected(modell.isHirlevel());
             } catch (IOException ex) {
                 Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -300,6 +317,10 @@ public class NewJFrame extends javax.swing.JFrame {
         cmbSzak.setSelectedIndex(0);
         chbHirlevel.setSelected(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void mnuPrgKimenetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPrgKimenetActionPerformed
+        System.out.println(modell);
+    }//GEN-LAST:event_mnuPrgKimenetActionPerformed
 
     private String tartalom(){
         String nev = txtNev.getText();
@@ -370,13 +391,13 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu mnuKonfig;
     private javax.swing.JMenuItem mnuPrgBetoltes;
     private javax.swing.JMenuItem mnuPrgKilepes;
+    private javax.swing.JMenuItem mnuPrgKimenet;
     private javax.swing.JMenuItem mnuPrgMentes;
     private javax.swing.JTextField txtNev;
     private javax.swing.JTextField txtUjNev;
