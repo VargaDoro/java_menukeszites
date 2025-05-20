@@ -31,11 +31,13 @@ public class NewJFrame extends javax.swing.JFrame {
         cmbSzak = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mnuKonfig = new javax.swing.JMenu();
         mnuPrgBetoltes = new javax.swing.JMenuItem();
         mnuPrgMentes = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuPrgKilepes = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -53,7 +55,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Szak");
 
-        jMenu1.setText("Program");
+        mnuKonfig.setText("Konfiguráció");
 
         mnuPrgBetoltes.setText("Betöltés...");
         mnuPrgBetoltes.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +63,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 mnuPrgBetoltesActionPerformed(evt);
             }
         });
-        jMenu1.add(mnuPrgBetoltes);
+        mnuKonfig.add(mnuPrgBetoltes);
 
         mnuPrgMentes.setText("Mentés...");
         mnuPrgMentes.addActionListener(new java.awt.event.ActionListener() {
@@ -69,8 +71,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 mnuPrgMentesActionPerformed(evt);
             }
         });
-        jMenu1.add(mnuPrgMentes);
-        jMenu1.add(jSeparator1);
+        mnuKonfig.add(mnuPrgMentes);
+        mnuKonfig.add(jSeparator1);
 
         mnuPrgKilepes.setText("Kilépés...");
         mnuPrgKilepes.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +80,14 @@ public class NewJFrame extends javax.swing.JFrame {
                 mnuPrgKilepesActionPerformed(evt);
             }
         });
-        jMenu1.add(mnuPrgKilepes);
+        mnuKonfig.add(mnuPrgKilepes);
+
+        jMenuBar1.add(mnuKonfig);
+
+        jMenu1.setText("Program");
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
 
@@ -261,7 +270,9 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenu mnuKonfig;
     private javax.swing.JMenuItem mnuPrgBetoltes;
     private javax.swing.JMenuItem mnuPrgKilepes;
     private javax.swing.JMenuItem mnuPrgMentes;
