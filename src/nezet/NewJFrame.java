@@ -306,10 +306,11 @@ public class NewJFrame extends javax.swing.JFrame {
         //String szak = cmbSzak.getSelectedItem().toString();
         String szak = (String)cmbSzak.getSelectedItem();
         boolean hirlevel = chbHirlevel.isSelected();
+        final String SEP = " ";
         String msg = "név: " + nev
                 +"\nszak: %s(%d)".formatted(szak, cmbSzak.getSelectedIndex())
                 +"\nhírlevél: " + (hirlevel?"kér":"nem kér");
-        return msg;
+        return nev + SEP + cmbSzak.getSelectedIndex() + SEP + hirlevel;
     }
     private void kilepes() throws HeadlessException {
         String msg = "Biztos kilépsz?";
