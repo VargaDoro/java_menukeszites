@@ -319,7 +319,14 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void mnuPrgKimenetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPrgKimenetActionPerformed
-        System.out.println(modell);
+        //TODO: ha nincs modell betöltve akkor ez nullpointer
+        //a szak nevét is ki kell nyerni most ??? ban helyette
+        String msg = "név: " + modell.getNev() + "\nszak" + "%s(%d)".formatted("???", modell.getSzakIndex()) + "\nhírlevél: " + (modell.isHirlevel()?"kér":"nemkér");
+        try {
+            Files.writeString(Path.of("modellBeszedes.txt"), msg);
+        } catch (IOException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_mnuPrgKimenetActionPerformed
 
     private String tartalom(){
